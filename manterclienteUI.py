@@ -30,9 +30,9 @@ class ManterClienteUI:
     def atualizar():
         option = st.selectbox(
             'Atualização de Clientes',
-            ('Email', 'Home phone', 'Mobile phone'))
+            (View.cliente_listar()))
         nome = st.text_input("Informe o novo nome")
         email = st.text_input("Informe o novo e-mail")
         fone = st.text_input("Informe o novo fone")
         if st.button("Atualizar"):
-            View.cliente_inserir(nome, email, fone)
+            View.cliente_atualizar(nome, email, fone)
