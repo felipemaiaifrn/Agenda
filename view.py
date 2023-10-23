@@ -1,4 +1,5 @@
 from models.cliente import Cliente, NCliente
+from models.servicos import Servico, NServico
 
 class View:
   @classmethod
@@ -16,5 +17,12 @@ class View:
   def cliente_excluir(cls, id):
     cliente = Cliente(id, "", "", "")
     NCliente.excluir(cliente)
+  @classmethod
+  def servico_inserir(cls, desc, valor, duracao):
+    servico = Servico(0, desc, valor, duracao)
+    NServico.inserir(servico)
+  @classmethod
+  def servico_listar(cls):
+    return NServico.listar()
 
     
