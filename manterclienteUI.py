@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 from view import View
 
 class ManterClienteUI:
@@ -13,7 +14,7 @@ class ManterClienteUI:
         with tab3:
             ManterClienteUI.atualizar()
         with tab4:
-            st.write("Excluir")
+            ManterClienteUI.excluir()
     def listar():
         clientes = View.cliente_listar()
         dic = []
@@ -27,6 +28,9 @@ class ManterClienteUI:
         fone = st.text_input("Informe o fone")
         if st.button("Inserir"):
             View.cliente_inserir(nome, email, fone)
+            st.success("Cliente inserido com sucesso")
+            time.sleep(2)
+            st.experimental_rerun()
     def atualizar():
         option = st.selectbox(
             'Atualização de Clientes',
@@ -34,5 +38,19 @@ class ManterClienteUI:
         nome = st.text_input("Informe o novo nome")
         email = st.text_input("Informe o novo e-mail")
         fone = st.text_input("Informe o novo fone")
+        id = option.get_id()
         if st.button("Atualizar"):
-            View.cliente_atualizar(nome, email, fone)
+            View.cliente_atualizar(id, nome, email, fone)
+            st.success("Cliente atualizado com sucesso")
+            time.sleep(2)
+            st.experimental_rerun()
+    def excluir():
+        option = st.selectbox(
+            'Exclusão de Clientes',
+            (View.cliente_listar()))
+        id = option.get_id()
+        if st.button("Excluir"):
+            View.cliente_excluir(id)
+            st.success("Cliente excluído com sucesso")
+            time.sleep(2)
+            st.experimental_rerun()
