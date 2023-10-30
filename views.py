@@ -57,3 +57,17 @@ class View:
     while aux <= data_fim :
       NAgenda.inserir(Agenda(0, aux, False, 0, 0))
       aux = aux + delta
+
+  def Cliente_Login(email, senha):
+    clientes = View.cliente_listar()
+    for cliente in clientes:
+      if cliente.get_email() == email and cliente.get_senha() == senha: 
+        return True
+
+  def Agenda_ListarHoje():
+    hoje = []
+    agendas = View.agenda_listar()
+    for agenda in agendas:
+      if agenda.get_confirmado() == False:
+        hoje.append(agenda)
+    return hoje

@@ -2,17 +2,21 @@ from templates.manterclienteUI import ManterClienteUI
 from templates.manterservicoUI import ManterServicoUI
 from templates.manteragendaUI import ManterAgendaUI
 from templates.abriragendaUI import AbrirAgendaUI
+from templates.loginUI import LoginUI
+from templates.agendahojeUI import AgendaHojeUI
 
 import streamlit as st
 
 class IndexUI:
       
     def sidebar():
-      op = st.sidebar.selectbox("Menu", ["Manter Clientes", "Manter Serviços", "Manter Agenda", "Abrir Agenda do Dia"])
+      op = st.sidebar.selectbox("Menu", ["Manter Clientes", "Manter Serviços", "Manter Agenda", "Abrir Agenda do Dia", "Login", "Agenda de Hoje"])
       if op == "Manter Clientes": ManterClienteUI.main()
       if op == "Manter Serviços": ManterServicoUI.main()
       if op == "Manter Agenda": ManterAgendaUI.main()
       if op == "Abrir Agenda do Dia": AbrirAgendaUI.main()
+      if op == "Login": LoginUI.main()
+      if op == "Agenda de Hoje": AgendaHojeUI.main()
 
       #if op == "Manter Clientes": st.session_state["page"] = "manter_clienteUI"
 
