@@ -26,7 +26,7 @@ class Cliente:
     return False
 
   def __str__(self):
-    return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__senha}"
+    return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
 
 
 class NCliente:
@@ -80,7 +80,11 @@ class NCliente:
       with open("clientes.json", mode="r") as arquivo:
         clientes_json = json.load(arquivo)
         for obj in clientes_json:
-          aux = Cliente(obj["_Cliente__id"], obj["_Cliente__nome"], obj["_Cliente__email"], obj["_Cliente__fone"], obj["_Cliente__senha"])
+          aux = Cliente(obj["_Cliente__id"], 
+                        obj["_Cliente__nome"], 
+                        obj["_Cliente__email"],
+                        obj["_Cliente__fone"],
+                        obj["_Cliente__senha"])
           cls.__clientes.append(aux)
     except FileNotFoundError:
       pass

@@ -27,17 +27,11 @@ class ManterClienteUI:
     email = st.text_input("Informe o e-mail")
     fone = st.text_input("Informe o fone")
     senha = st.text_input("Informe a senha")
-    clientes = View.cliente_listar()
-
     if st.button("Inserir"):
-      for aux in clientes:
-        if aux.get_email() == email: 
-          st.write('E-mail já cadastrado!')
-        else:
-          View.cliente_inserir(nome, email, fone, senha)
-          st.success("Cliente inserido com sucesso")
-          time.sleep(2)
-          st.rerun()
+      View.cliente_inserir(nome, email, fone, senha)
+      st.success("Cliente inserido com sucesso")
+      time.sleep(2)
+      st.rerun()
 
   def atualizar():
     clientes = View.cliente_listar()
@@ -48,7 +42,7 @@ class ManterClienteUI:
       nome = st.text_input("Informe o novo nome", op.get_nome())
       email = st.text_input("Informe o novo e-mail", op.get_email())
       fone = st.text_input("Informe o novo fone", op.get_fone())
-      senha = st.text_input("Informe a nova senha", op.get_senha())
+      senha = st.text_input("Informe a nova senha")
       if st.button("Atualizar"):
         id = op.get_id()
         View.cliente_atualizar(id, nome, email, fone, senha)

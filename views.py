@@ -22,6 +22,17 @@ class View:
     cliente = Cliente(id, "", "", "", "")
     NCliente.excluir(cliente)    
 
+  def cliente_admin():
+    for cliente in View.cliente_listar():
+      if cliente.get_nome() == "admin": return
+    View.cliente_inserir("admin", "admin", "0000", "admin")  
+
+  def cliente_login(email, senha):
+    for cliente in View.cliente_listar():
+      if cliente.get_email() == email and cliente.get_senha() == senha:
+        return cliente
+    return None
+
   def servico_listar():
     return NServico.listar()
 
@@ -37,8 +48,20 @@ class View:
   def servico_excluir(id):
     NServico.excluir(Servico(id, "", "", ""))
 
+  def servico_reajustar(percentual):
+    for servico in View.servico_listar():    
+      NServico.atualizar(Servico(servico.get_id(), servico.get_descricao(), servico.get_valor() * (1 + percentual/100), servico.get_duracao()))
+
   def agenda_listar():
     return NAgenda.listar()
+
+  def agenda_listarhoje():
+    r = []
+    hoje = datetime.datetime.today()
+    for horario in View.agenda_listar():
+      if horario.get_confirmado() == False and horario.get_data().date() == hoje.date():
+        r.append(horario)
+    return r    
 
   def agenda_inserir(data, confirmado, id_cliente, id_servico):
     NAgenda.inserir(Agenda(0, data, confirmado, id_cliente, id_servico))
@@ -57,17 +80,3 @@ class View:
     while aux <= data_fim :
       NAgenda.inserir(Agenda(0, aux, False, 0, 0))
       aux = aux + delta
-
-  def Cliente_Login(email, senha):
-    clientes = View.cliente_listar()
-    for cliente in clientes:
-      if cliente.get_email() == email and cliente.get_senha() == senha: 
-        return True
-
-  def Agenda_ListarHoje():
-    hoje = []
-    agendas = View.agenda_listar()
-    for agenda in agendas:
-      if agenda.get_confirmado() == False:
-        hoje.append(agenda)
-    return hoje
