@@ -8,6 +8,7 @@ class ServicoReajusteUI:
     st.header("Reajuste de Preço")
     ServicoReajusteUI.listar()
 
+
   def listar():
     servicos = View.servico_listar()
     if len(servicos) == 0:
