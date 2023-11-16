@@ -24,7 +24,7 @@ class View:
 
   def cliente_admin():
     for cliente in View.cliente_listar():
-      if cliente.get_nome() == "admin": return
+      if cliente.get_email() == "admin": return
     View.cliente_inserir("admin", "admin", "0000", "admin")  
 
   #Avaliação
@@ -91,3 +91,6 @@ class View:
     while aux <= data_fim :
       NAgenda.inserir(Agenda(0, aux, False, 0, 0))
       aux = aux + delta
+
+  def editar_perfil(id, nome, email, fone, senha):
+    NCliente.atualizar(Cliente(id, nome, email, fone, senha))
