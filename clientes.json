@@ -1,1 +1,30 @@
-[{"_Cliente__id": 1, "_Cliente__nome": "Administrador", "_Cliente__email": "admin", "_Cliente__fone": "0000", "_Cliente__senha": "admin"}, {"_Cliente__id": 2, "_Cliente__nome": "Felipe", "_Cliente__email": "felipe@email.com", "_Cliente__fone": "987654321", "_Cliente__senha": "1234"}, {"_Cliente__id": 3, "_Cliente__nome": "Diego", "_Cliente__email": "diego@email.com", "_Cliente__fone": "123456789", "_Cliente__senha": "1234"}]
+[
+  {
+    "_Cliente__id": 1,
+    "_Cliente__nome": "admin",
+    "_Cliente__email": "admin",
+    "_Cliente__fone": "0000",
+    "_Cliente__senha": "admin"
+  },
+  {
+    "_Cliente__id": 2,
+    "_Cliente__nome": "Felipe",
+    "_Cliente__email": "felipe@email.com",
+    "_Cliente__fone": "987654321",
+    "_Cliente__senha": "1234"
+  },
+  {
+    "_Cliente__id": 3,
+    "_Cliente__nome": "Diego",
+    "_Cliente__email": "diego@email.com",
+    "_Cliente__fone": "123456789",
+    "_Cliente__senha": "4321"
+  },
+  {
+    "_Cliente__id": 4,
+    "_Cliente__nome": "Gilbert",
+    "_Cliente__email": "gilbert@email.com",
+    "_Cliente__fone": "000000000",
+    "_Cliente__senha": "0000"
+  }
+]

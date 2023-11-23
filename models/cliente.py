@@ -74,6 +74,13 @@ class NCliente:
       cls.salvar()
 
   @classmethod
+  def ver_email(cls, email):
+    for cliente in cls.__clientes:
+      if email == cliente.get_email():
+          return False
+    return True
+
+  @classmethod
   def abrir(cls):
     cls.__clientes = []
     try:
@@ -92,4 +99,4 @@ class NCliente:
   @classmethod
   def salvar(cls):
     with open("clientes.json", mode="w") as arquivo:
-      json.dump(cls.__clientes, arquivo, default=vars)
+      json.dump(cls.__clientes, arquivo, default=vars, indent=2)

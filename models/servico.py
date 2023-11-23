@@ -2,8 +2,6 @@ import json
 
 class Servico:
   def __init__(self, id, descricao, valor, duracao):
-    if valor < 0: raise ValueError("Valor inválido")
-    if duracao <= 0: raise ValueError("Duração inválida")
     self.__id = id
     self.__descricao = descricao
     self.__valor = valor
@@ -16,12 +14,8 @@ class Servico:
 
   def set_id(self, id): self.__id = id
   def set_descricao(self, descricao): self.__descricao = descricao
-  def set_valor(self, valor): 
-    if valor < 0: raise ValueError("Valor inválido")
-    self.__valor = valor
-  def set_duracao(self, duracao):
-    if duracao <= 0: raise ValueError("Duração inválida")
-    self.__duracao = duracao
+  def set_valor(self, valor): self.__valor = valor
+  def set_duracao(self, duracao): self.__duracao = duracao
 
   def __eq__(self, x):
     if self.__id == x.__id and self.__descricao == x.__descricao and self.__valor == x.__valor and self.__duracao == x.__duracao:
@@ -90,4 +84,4 @@ class NServico:
   @classmethod
   def salvar(cls):
     with open("servicos.json", mode="w") as arquivo:
-      json.dump(cls.__servicos, arquivo, default=vars)
+      json.dump(cls.__servicos, arquivo, default=vars, indent=2)

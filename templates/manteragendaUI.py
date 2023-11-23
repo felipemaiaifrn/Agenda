@@ -18,10 +18,29 @@ class ManterAgendaUI:
     if len(agendas) == 0:
       st.write("Nenhum horário cadastrado")
     else:
-      dic = []
-      for obj in agendas: dic.append(obj.to_json())
-      df = pd.DataFrame(dic)
-      st.dataframe(df)
+      tabela = []
+      
+      for agenda in View.agenda_listar():
+        id = agenda.get_id()
+        data = agenda.get_data()
+        conf = agenda.get_confirmado()
+        idCliente = int(agenda.get_id_cliente())
+        idServico = int(agenda.get_id_servico())
+
+        if idCliente != 0 and idServico != 0:
+          for cliente in View.cliente_listar():
+            if idCliente == cliente.get_id():
+              idCliente = cliente.get_nome()
+            
+          for servico in View.servico_listar():
+            if idServico == servico.get_id():
+              idServico = servico.get_descricao()
+
+        tabela.append([id, data, conf, idCliente, idServico])
+
+      df = pd.DataFrame(tabela, columns=['Id', 'Data', 'Confirmado', 'Cliente', 'Serviço'])
+
+      st.dataframe(df, use_container_width=True)
 
   def inserir():
     datastr = st.text_input("Informe a data no formato *dd/mm/aaaa HH\:MM*")
@@ -30,11 +49,14 @@ class ManterAgendaUI:
     servicos = View.servico_listar()
     servico = st.selectbox("Selecione o serviço", servicos)
     if st.button("Inserir"):
-      data = datetime.datetime.strptime(datastr, "%d/%m/%Y %H:%M")
-      View.agenda_inserir(data, True, cliente.get_id(), servico.get_id())
-      st.success("Horário inserido com sucesso")
-      time.sleep(2)
-      st.rerun()
+      try:
+        data = datetime.datetime.strptime(datastr, "%d/%m/%Y %H:%M")
+        View.agenda_inserir(data, False, cliente.get_id(), servico.get_id())
+        st.success("Horário inserido com sucesso")
+        time.sleep(2)
+        st.rerun()
+      except ValueError:
+        st.error('Data inválida!')
 
   def atualizar():
     agendas = View.agenda_listar()
@@ -56,11 +78,14 @@ class ManterAgendaUI:
       else:
         servico = st.selectbox("Selecione o novo serviço", servicos)
       if st.button("Atualizar"):
-        data = datetime.datetime.strptime(datastr, "%d/%m/%Y %H:%M")
-        View.agenda_atualizar(op.get_id(), data, op.get_confirmado(), cliente.get_id(), servico.get_id())
-        st.success("Horário atualizado com sucesso")
-        time.sleep(2)
-        st.rerun()
+        try:
+          data = datetime.datetime.strptime(datastr, "%d/%m/%Y %H:%M")
+          View.agenda_atualizar(op.get_id(), data, op.get_confirmado(), cliente.get_id(), servico.get_id())
+          st.success("Horário atualizado com sucesso")
+          time.sleep(2)
+          st.rerun()
+        except ValueError:
+          st.error('Data inválida!')
 
   def excluir():
     agendas = View.agenda_listar()
@@ -73,5 +98,3 @@ class ManterAgendaUI:
         st.success("Horário excluído com sucesso")
         time.sleep(2)
         st.rerun()
-
-
